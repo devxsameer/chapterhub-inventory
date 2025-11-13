@@ -9,7 +9,8 @@
     "dev": "concurrently -n \"SERVER,TAILWIND\" -c \"cyan,magenta\" \"pnpm dev:server\" \"pnpm dev:css\"",
     "dev:server": "nodemon",
     "dev:css": "tailwindcss -i ./public/css/global.css -o ./public/css/output.css --watch --fast",
-    "seed": "node ./db/seed.js",
+    "seed": "node db/seed.js",
+    "seed:reset": "node db/seed.js --reset",
     "css:build": "tailwindcss -i ./public/css/global.css -o ./public/css/output.css --minify"
   },
   "keywords": [],
