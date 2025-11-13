@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("partials/head") %>
+  <body>
+    <div
+      class="min-h-screen font-outfit text-neutral-950 bg-neutral-200 flex flex-col"
+    >
+      <%- include("partials/header") %>
+
+      <div class="flex grow">
+        <%- include("partials/sidebar") %>
+
+        <div class="grow flex flex-col bg-neutral-50">
+          <!-- Centered Content -->
+          <div class="grow p-6 flex items-center justify-center">
+            <div
+              class="bg-white shadow-xl rounded-2xl min-w-sm p-10 text-center max-w-lg mx-auto"
+            >
+              <h1 class="text-4xl font-bold mb-4"><%= code || 500 %></h1>
+
+              <p class="text-lg text-neutral-600 mb-6">
+                <%= message || "An unexpected error occurred." %>
+              </p>
+
+              <% if (locals?.details) { %>
+              <pre
+                class="bg-neutral-100 text-sm p-4 rounded-lg overflow-auto text-left mb-4"
+              >
+<%= details %>
+                </pre
+              >
+              <% } %> <% if (locals?.url) { %>
+              <p class="text-sm text-neutral-500 mb-4">
+                Requested URL: <span class="font-mono"><%= url %></span>
+              </p>
+              <% } %>
+
+              <a
+                href="/"
+                class="inline-block mt-4 px-5 py-2 bg-neutral-900 text-neutral-100 rounded-lg hover:bg-neutral-800 transition"
+              >
+                Go Back Home
+              </a>
+            </div>
+          </div>
+
+          <%- include("partials/footer") %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

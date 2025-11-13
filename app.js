@@ -28,12 +28,23 @@ app.use("/genres", genresRouter);
 app.use("/books", booksRouter);
 
 app.use((req, res) => {
-  res.status(404).render("404", { title: "Page Not Found" });
+  res.status(404).render("error", {
+    title: "Page Not Found",
+    code: 404,
+    message: "Page not found.",
+    url: req.originalUrl,
+  });
 });
 
 app.use((err, req, res, next) => {
   console.error(err);
-  res.status(500).render("500", { error: err });
+
+  res.status(500).render("error", {
+    title: "Server Error",
+    code: 500,
+    message: "Something went wrong on our side.",
+    details: err.message || err,
+  });
 });
 
 const PORT = process.env.PORT || 6969;

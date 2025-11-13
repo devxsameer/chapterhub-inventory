@@ -1,9 +1,8 @@
 import { Router } from "express";
+import { getGenres } from "../controllers/genresController.js";
 
 const genresRouter = Router();
 
-genresRouter.route("/").get((req, res) => {
-  res.render("genres", { title: "All Genres" });
-});
+genresRouter.get("/", getGenres);
 
 export default genresRouter;

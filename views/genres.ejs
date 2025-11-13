@@ -6,14 +6,29 @@
       class="min-h-screen font-outfit text-neutral-950 bg-neutral-200 flex flex-col"
     >
       <%- include("partials/header") %>
+
       <div class="flex grow">
         <%- include("partials/sidebar") %>
+
         <div class="grow flex flex-col bg-neutral-50">
-          <div class="grow">
-            <section class="bg-neutral-200">
-              <h2>Genres</h2>
-            </section>
+          <div class="grow p-6">
+            <div class="bg-white rounded-xl shadow p-6">
+              <h2 class="text-2xl font-semibold mb-4">Genres</h2>
+
+              <% if (genres.length === 0) { %>
+              <p class="text-neutral-600">No genres found.</p>
+              <% } else { %>
+              <ul class="space-y-2">
+                <% genres.forEach(genre => { %>
+                <li class="p-3 bg-neutral-100 rounded-lg shadow-sm">
+                  <%= genre.name %>
+                </li>
+                <% }) %>
+              </ul>
+              <% } %>
+            </div>
           </div>
+
           <%- include("partials/footer") %>
         </div>
       </div>
