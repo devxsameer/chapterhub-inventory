@@ -1,0 +1,31 @@
+{
+  "name": "chapterhub-inventory",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "concurrently -n \"SERVER,TAILWIND\" -c \"cyan,magenta\" \"pnpm dev:server\" \"pnpm dev:css\"",
+    "dev:server": "nodemon",
+    "dev:css": "tailwindcss -i ./public/css/global.css -o ./public/css/output.css --watch --fast",
+    "seed": "node ./db/seed.js",
+    "css:build": "tailwindcss -i ./public/css/global.css -o ./public/css/output.css --minify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.22.0+sha512.bf049efe995b28f527fd2b41ae0474ce29186f7edcb3bf545087bd61fbbebb2bf75362d1307fda09c2d288e1e499787ac12d4fcb617a974718a6051f2eee741c",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.17",
+    "concurrently": "^9.2.1",
+    "nodemon": "^3.1.11",
+    "tailwindcss": "^4.1.17"
+  }
+}

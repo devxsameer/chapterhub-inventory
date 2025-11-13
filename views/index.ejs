@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("partials/head") %>
+  <body>
+    <div
+      class="min-h-screen font-outfit text-neutral-950 bg-neutral-200 flex flex-col"
+    >
+      <%- include("partials/header") %>
+      <div class="flex grow">
+        <%- include("partials/sidebar") %>
+        <div class="grow flex flex-col bg-neutral-50">
+          <div class="grow">
+            <!-- Hero -->
+            <section class="px-4 py-16 bg-neutral-200">
+              <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
+                  Welcome to
+                  <span class="text-purple-700 text-5xl">ChapterHub</span>
+                  Inventory
+                </h1>
+                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+                  A simple, elegant inventory system for bookstores. Manage
+                  genres, track books, and keep your library organized.
+                </p>
+
+                <div class="mt-8 flex justify-center gap-4">
+                  <a
+                    href="/genres"
+                    class="px-6 py-3 bg-purple-400 text-purple-900 rounded-xl shadow hover:bg-purple-500 transition"
+                  >
+                    Browse Genres
+                  </a>
+                  <a
+                    href="/books"
+                    class="px-6 py-3 bg-gray-900 text-white rounded-xl shadow hover:bg-gray-800 transition"
+                  >
+                    Explore Books
+                  </a>
+                </div>
+              </div>
+            </section>
+
+            <!-- Quick Nav Cards -->
+            <section class="px-4 py-12 grid md:grid-cols-2 gap-8 bg-neutral-50">
+              <!-- Genres Card -->
+              <a
+                href="/genres"
+                class="block p-8 bg-white rounded-2xl shadow hover:shadow-lg transition border border-gray-200"
+              >
+                <h2 class="text-2xl font-bold mb-3">📂 Manage Genres</h2>
+                <p class="text-gray-600">
+                  Create, edit, and organize book genres. Helps keep your
+                  bookstore structured.
+                </p>
+              </a>
+
+              <!-- Books Card -->
+              <a
+                href="/books"
+                class="block p-8 bg-white rounded-2xl shadow hover:shadow-lg transition border border-gray-200"
+              >
+                <h2 class="text-2xl font-bold mb-3">📘 Manage Books</h2>
+                <p class="text-gray-600">
+                  Add new books, update quantities, assign genres, and track
+                  your inventory effortlessly.
+                </p>
+              </a>
+            </section>
+          </div>
+          <%- include("partials/footer") %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
