@@ -1,4 +1,5 @@
-import { getAllGenresFromDb } from "../db/queries/genres.js";
+import { createGenreInDb, getAllGenresFromDb } from "../db/queries/genres.js";
+import { matchedData, validationResult } from "express-validator";
 
 async function getGenres(req, res, next) {
   try {
@@ -12,5 +13,30 @@ async function getGenres(req, res, next) {
     next(err);
   }
 }
+async function createGenreGet(req, res) {
+  res.render("newGenre");
+}
+async function createGenrePost(req, res, next) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const msg = errors.array()[0].msg;
 
-export { getGenres };
+    return res.status(400).render("error", {
+      title: "Validation Error",
+      code: 400,
+      message: msg,
+      details: null,
+    });
+  }
+  try {
+    const { name, description } = matchedData(req);
+
+    const genre = await createGenreInDb(name, description);
+    console.log(genre);
+
+    res.redirect("/genres");
+  } catch (err) {
+    next(err); // goes to your custom error handler
+  }
+}
+export { getGenres, createGenrePost, createGenreGet };
