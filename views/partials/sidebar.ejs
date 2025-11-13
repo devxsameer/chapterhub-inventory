@@ -1,31 +1,39 @@
-<nav class="w-65 min-w-65 bg-purple-700 rounded-tr-xl p-4">
-  <ul class="flex flex-col gap-2 text-neutral-50">
-    <li>
-      <a
-        href="/"
-        class="flex gap-2 items-center p-2 py-1.5 rounded-lg <%= currentPath === '/' ? 'bg-purple-900' : '' %>"
-      >
-        <%- include("icons/homeIcon") %>
-        <span>Home</span>
-      </a>
-    </li>
-    <li>
-      <a
-        href="/genres"
-        class="flex gap-2 items-center p-2 py-1.5 rounded-lg <%= currentPath.startsWith('/genres') ? 'bg-purple-900' : '' %>"
-      >
-        <%- include("icons/genresIcon") %>
-        <span>Genres</span>
-      </a>
-    </li>
-    <li>
-      <a
-        href="/books"
-        class="flex gap-2 items-center p-2 py-1.5 rounded-lg <%= currentPath.startsWith('/books') ? 'bg-purple-900' : '' %>"
-      >
-        <%- include("icons/booksIcon") %>
-        <span>Books</span>
-      </a>
-    </li>
-  </ul>
+<nav
+  class="relative w-65 shrink-0 rounded-tr-xl overflow-hidden bg-center bg-cover bg-no-repeat p-4 bg-[url(/img/sidebar_bg.jpg)]"
+>
+  <!-- Color overlay -->
+  <div class="absolute inset-0 bg-purple-700/70"></div>
+
+  <!-- Actual sidebar content -->
+  <div class="relative z-10">
+    <ul class="flex flex-col gap-2 text-neutral-50">
+      <li>
+        <a
+          href="/"
+          class="flex gap-2 items-center p-2 py-1.5 rounded-lg <%= currentPath === '/' ? 'bg-purple-900' : '' %>"
+        >
+          <%- include("icons/homeIcon") %>
+          <span>Home</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href="/genres"
+          class="flex gap-2 items-center p-2 py-1.5 rounded-lg <%= currentPath.startsWith('/genres') ? 'bg-purple-900' : '' %>"
+        >
+          <%- include("icons/genresIcon") %>
+          <span>Genres</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href="/books"
+          class="flex gap-2 items-center p-2 py-1.5 rounded-lg <%= currentPath.startsWith('/books') ? 'bg-purple-900' : '' %>"
+        >
+          <%- include("icons/booksIcon") %>
+          <span>Books</span>
+        </a>
+      </li>
+    </ul>
+  </div>
 </nav>
