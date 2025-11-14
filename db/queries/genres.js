@@ -4,6 +4,12 @@ async function getAllGenresFromDb() {
   const { rows } = await pool.query("SELECT * FROM genres ORDER BY name;");
   return rows;
 }
+async function getGenreFromDb(genreId) {
+  const { rows } = await pool.query("SELECT * FROM genres WHERE id = $1;", [
+    genreId,
+  ]);
+  return rows[0];
+}
 
 async function createGenreInDb(name, description) {
   if (!name || typeof name !== "string") {
@@ -36,4 +42,4 @@ async function createGenreInDb(name, description) {
   }
 }
 
-export { getAllGenresFromDb, createGenreInDb };
+export { getAllGenresFromDb, createGenreInDb, getGenreFromDb };

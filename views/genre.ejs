@@ -21,22 +21,12 @@
               >
             </div>
             <div class="p-6">
-              <% if (genres.length === 0) { %>
-              <p class="text-neutral-600">No genres found.</p>
-              <% } else { %>
-              <ul class="flex">
-                <% genres.forEach(genre => { %>
-                <li>
-                  <a
-                    class="p-3 bg-white rounded-lg shadow"
-                    href="/genres/<%= genre.id %>"
-                  >
-                    <%= genre.name %>
-                  </a>
-                </li>
-                <% }) %>
-              </ul>
-              <% } %>
+              <a
+                class="p-3 bg-white rounded-lg shadow"
+                href="/genres/<%= genre.id %>"
+              >
+                <%= genre.name %>
+              </a>
             </div>
           </main>
 
