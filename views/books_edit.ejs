@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("partials/head") %>
+  <body
+    class="h-screen flex flex-col bg-neutral-200 font-outfit overflow-y-auto"
+  >
+    <%- include("partials/header") %>
+
+    <div class="flex pt-12 h-full">
+      <%- include("partials/sidebar") %>
+
+      <div class="ml-64 flex-1">
+        <main class="bg-neutral-50">
+          <div class="bg-neutral-200 p-4 mb-4 sticky top-12">
+            <h2 class="text-3xl font-semibold mb-2">Edit Book</h2>
+            <a href="/books" class="text-sm underline">Back to Books</a>
+          </div>
+
+          <div class="p-6 max-w-2xl">
+            <% if (errors.length) { %>
+            <ul class="mb-4 text-red-600">
+              <% errors.forEach(err => { %>
+              <li><%= err.msg %></li>
+              <% }) %>
+            </ul>
+            <% } %>
+
+            <form
+              action=""
+              method="POST"
+              class="space-y-4"
+              enctype="multipart/form-data"
+            >
+              <div>
+                <label class="block">Title</label>
+                <input type="text" name="title" value="<%= formData.title || ""
+                %>" class="border p-2 w-full rounded" />
+              </div>
+
+              <div>
+                <label class="block">Author</label>
+                <input type="text" name="author" value="<%= formData.author ||
+                "" %>" class="border p-2 w-full rounded" />
+              </div>
+
+              <div>
+                <label class="block">Description</label>
+                <textarea name="description" class="border p-2 w-full rounded">
+<%= formData.description || "" %></textarea
+                >
+              </div>
+
+              <div class="grid grid-cols-3 gap-3">
+                <div>
+                  <label class="block">Year</label>
+                  <input type="number" name="year" value="<%= formData.year ||
+                  "" %>" class="border p-2 w-full rounded" />
+                </div>
+
+                <div>
+                  <label class="block">Genre</label>
+                  <select name="genre_id" class="border p-2 w-full rounded">
+                    <option value="">None</option>
+
+                    <% genres.forEach((g) => { const isSelected =
+                    String(formData.genre_id) === String(g.id); const
+                    selectedAttr = isSelected ? "selected" : ""; %>
+                    <option value="<%= g.id %>" <%="selectedAttr" %>
+                      ><%= g.name %>
+                    </option>
+                    <% }) %>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block">Quantity</label>
+                  <input
+                    type="number"
+                    name="quantity"
+                    min="0"
+                    value="<%= formData.quantity || 0 %>"
+                    class="border p-2 w-full rounded"
+                  />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block">Price</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    name="price"
+                    value="<%= formData.price || 0.00 %>"
+                    class="border p-2 w-full rounded"
+                  />
+                </div>
+
+                <div>
+                  <label class="block mb-1">Book Cover</label>
+
+                  <!-- Preview Box -->
+                  <div class="mb-3">
+                    <img
+                      id="imagePreview"
+                      src="<%= formData.image_url || '' %>"
+                      class="<%= formData.image_url ? 'block' : 'hidden' %> w-40 rounded shadow"
+                    />
+                  </div>
+
+                  <!-- File Input -->
+                  <input
+                    type="file"
+                    name="image"
+                    id="imageInput"
+                    accept="image/*"
+                    class="border p-2 w-full rounded bg-white"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <button class="bg-purple-500 px-4 py-2 text-white rounded">
+                  Save Changes
+                </button>
+                <a href="/books" class="ml-4 underline">Cancel</a>
+              </div>
+            </form>
+          </div>
+        </main>
+
+        <%- include("partials/footer") %>
+      </div>
+    </div>
+    <script>
+      const imageInput = document.getElementById("imageInput");
+      const imagePreview = document.getElementById("imagePreview");
+
+      imageInput?.addEventListener("change", function () {
+        const file = this.files[0];
+
+        if (!file) {
+          imagePreview.classList.add("hidden");
+          imagePreview.src = "";
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          imagePreview.src = e.target.result;
+          imagePreview.classList.remove("hidden");
+        };
+        reader.readAsDataURL(file);
+      });
+    </script>
+  </body>
+</html>

@@ -1,21 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
   <%- include("partials/head") %>
-  <body>
-    <div
-      class="min-h-screen font-outfit text-neutral-950 bg-neutral-200 flex flex-col"
-    >
-      <%- include("partials/header") %>
-      <div class="flex grow">
-        <%- include("partials/sidebar") %>
-        <div class="grow flex flex-col bg-neutral-50">
-          <div class="grow">
-            <section class="bg-neutral-200">
-              <h2>Books</h2>
-            </section>
+  <body
+    class="h-screen flex flex-col bg-neutral-200 font-outfit overflow-y-auto"
+  >
+    <%- include("partials/header") %>
+
+    <div class="flex pt-12 h-full">
+      <%- include("partials/sidebar") %>
+
+      <div class="ml-64 flex-1">
+        <main class="bg-neutral-50">
+          <div class="bg-neutral-200 p-4 mb-4 sticky top-12">
+            <h2 class="text-4xl font-semibold mb-2">Books</h2>
+            <a
+              href="/books/new"
+              class="text-sm bg-purple-500 px-3 py-1 rounded shadow text-white"
+              >Add Book</a
+            >
           </div>
-          <%- include("partials/footer") %>
-        </div>
+
+          <div class="p-4">
+            <% if (books.length === 0) { %>
+            <p class="text-neutral-600">No books found.</p>
+            <% } else { %>
+            <ul class="space-y-3">
+              <% books.forEach(book => { %>
+              <li class="p-4 bg-white rounded-lg shadow flex justify-between">
+                <div>
+                  <h4 class="font-semibold text-lg"><%= book.title %></h4>
+                  <p class="text-sm text-neutral-600">
+                    <%= book.author ? book.author + " • " : "" %> <%= book.year
+                    ? book.year + " • " : "" %> <%= book.genre_name ?
+                    book.genre_name : "No genre" %>
+                  </p>
+                  <% if (book.description) { %>
+                  <p class="mt-2 text-sm text-neutral-700">
+                    <%= book.description %>
+                  </p>
+                  <% } %> <% if (book.image_url) { %>
+                  <img
+                    src="<%= book.image_url %>"
+                    alt="<%= book.title %>"
+                    class="mt-3 max-w-xs rounded"
+                  />
+                  <% } %>
+                </div>
+
+                <div class="space-x-3">
+                  <a
+                    href="/books/<%= book.id %>/edit"
+                    class="text-blue-600 underline"
+                    >Edit</a
+                  >
+                  <a
+                    href="/books/<%= book.id %>/delete"
+                    class="text-red-600 underline"
+                    >Delete</a
+                  >
+                </div>
+              </li>
+              <% }) %>
+            </ul>
+            <% } %>
+          </div>
+        </main>
+
+        <%- include("partials/footer") %>
       </div>
     </div>
   </body>
