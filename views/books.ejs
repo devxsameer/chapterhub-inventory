@@ -24,40 +24,46 @@
             <% if (books.length === 0) { %>
             <p class="text-neutral-600">No books found.</p>
             <% } else { %>
-            <ul class="space-y-3">
+            <ul class="grid grid-cols-3 gap-4">
               <% books.forEach(book => { %>
-              <li class="p-4 bg-white rounded-lg shadow flex justify-between">
-                <div>
-                  <h4 class="font-semibold text-lg"><%= book.title %></h4>
-                  <p class="text-sm text-neutral-600">
-                    <%= book.author ? book.author + " • " : "" %> <%= book.year
-                    ? book.year + " • " : "" %> <%= book.genre_name ?
-                    book.genre_name : "No genre" %>
-                  </p>
-                  <% if (book.description) { %>
-                  <p class="mt-2 text-sm text-neutral-700">
-                    <%= book.description %>
-                  </p>
-                  <% } %> <% if (book.image_url) { %>
+              <li class="p-4 bg-white rounded-lg shadow flex gap-4">
+                <div class="w-48 min-h-48">
+                  <% if (book.image_url) { %>
                   <img
                     src="<%= book.image_url %>"
                     alt="<%= book.title %>"
-                    class="mt-3 max-w-xs rounded"
+                    loading="lazy"
+                    class="w-full rounded"
                   />
                   <% } %>
                 </div>
+                <div>
+                  <div>
+                    <h4 class="font-semibold text-lg"><%= book.title %></h4>
+                    <p class="text-sm text-neutral-600">
+                      <%= book.author ? book.author + " • " : "" %> <%=
+                      book.year ? book.year + " • " : "" %> <%= book.genre_name
+                      ? book.genre_name : "No genre" %>
+                    </p>
+                    <% if (book.description) { %>
+                    <p class="mt-2 text-sm text-neutral-700">
+                      <%= book.description %>
+                    </p>
+                    <% } %>
+                  </div>
 
-                <div class="space-x-3">
-                  <a
-                    href="/books/<%= book.id %>/edit"
-                    class="text-blue-600 underline"
-                    >Edit</a
-                  >
-                  <a
-                    href="/books/<%= book.id %>/delete"
-                    class="text-red-600 underline"
-                    >Delete</a
-                  >
+                  <div class="space-x-3">
+                    <a
+                      href="/books/<%= book.id %>/edit"
+                      class="text-blue-600 underline"
+                      >Edit</a
+                    >
+                    <a
+                      href="/books/<%= book.id %>/delete"
+                      class="text-red-600 underline"
+                      >Delete</a
+                    >
+                  </div>
                 </div>
               </li>
               <% }) %>

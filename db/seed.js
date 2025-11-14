@@ -1,5 +1,7 @@
 // db/seed.js
 import pool from "./pool.js";
+import genres from "./data/genres.js";
+import books from "./data/books.js";
 
 //
 // ────────────────────────────────────────────────────────────────
@@ -40,7 +42,7 @@ async function createTables() {
       price NUMERIC(10,2) DEFAULT 0.00,
       quantity INTEGER DEFAULT 0,
       created_at TIMESTAMPTZ DEFAULT NOW(),
-      UNIQUE(title, author)     -- Avoid duplicates of the same book
+      UNIQUE(title, author)
     );
   `);
 
@@ -55,23 +57,6 @@ async function createTables() {
 
 async function seedGenres() {
   console.log("\n🌱 Seeding genres...");
-
-  const genres = [
-    {
-      name: "Fiction",
-      description: "All fictional narratives and storytelling.",
-    },
-    {
-      name: "Fantasy",
-      description: "Worlds of magic, myths, and epic quests.",
-    },
-    { name: "Horror", description: "Spine-chilling stories meant to scare." },
-    {
-      name: "Sci-Fi",
-      description: "Science fiction and futuristic adventures.",
-    },
-    { name: "Mystery", description: "Crime, clues, and investigations." },
-  ];
 
   for (const g of genres) {
     await pool.query(
@@ -94,49 +79,6 @@ async function seedGenres() {
 
 async function seedBooks() {
   console.log("\n📚 Seeding books...");
-
-  const books = [
-    {
-      title: "The Hobbit",
-      author: "J.R.R. Tolkien",
-      year: 1937,
-      genre: "Fantasy",
-      description: "A hobbit embarks on an unexpected adventure.",
-      image_url: "https://example.com/hobbit.jpg",
-      price: 12.99,
-      quantity: 8,
-    },
-    {
-      title: "Dune",
-      author: "Frank Herbert",
-      year: 1965,
-      genre: "Sci-Fi",
-      description: "A deep and powerful sci-fi epic set on Arrakis.",
-      image_url: "https://example.com/dune.jpg",
-      price: 15.5,
-      quantity: 5,
-    },
-    {
-      title: "It",
-      author: "Stephen King",
-      year: 1986,
-      genre: "Horror",
-      description: "A group of children face an ancient evil.",
-      image_url: "https://example.com/it.jpg",
-      price: 10.99,
-      quantity: 4,
-    },
-    {
-      title: "Sherlock Holmes: A Study in Scarlet",
-      author: "Arthur Conan Doyle",
-      year: 1887,
-      genre: "Mystery",
-      description: "The first Sherlock Holmes detective story.",
-      image_url: "https://example.com/sherlock.jpg",
-      price: 9.5,
-      quantity: 6,
-    },
-  ];
 
   for (const b of books) {
     await pool.query(
