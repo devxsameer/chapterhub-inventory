@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("partials/head") %>
+  <body
+    class="h-screen flex flex-col bg-neutral-200 font-outfit overflow-y-auto"
+  >
+    <%- include("partials/header") %>
+
+    <div class="flex pt-12 h-full">
+      <%- include("partials/sidebar") %>
+
+      <main class="ml-64 flex-1 flex flex-col">
+        <div class="grow p-6">
+          <div class="max-w-xl mx-auto p-6">
+            <h2 class="text-3xl font-semibold mb-4">Edit Genre</h2>
+
+            <form action="" method="POST" class="space-y-4">
+              <div>
+                <label class="block">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value="<%= formData.name %>"
+                  class="border p-2 w-full rounded"
+                />
+              </div>
+
+              <div>
+                <label class="block">Description</label>
+                <textarea name="description" class="border p-2 w-full rounded">
+<%= formData.description %></textarea
+                >
+              </div>
+
+              <button class="bg-purple-500 px-4 py-2 rounded text-white">
+                Update
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <%- include("partials/footer") %>
+      </main>
+    </div>
+  </body>
+</html>

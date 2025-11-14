@@ -1,14 +1,15 @@
 import {
   createGenreInDb,
+  deleteGenreFromDb,
   getAllGenresFromDb,
-  getGenreFromDb,
+  getGenreByIdFromDb,
+  updateGenreInDb,
 } from "../db/queries/genres.js";
 import { matchedData, validationResult } from "express-validator";
 
-async function getGenres(req, res, next) {
+export async function getGenres(req, res, next) {
   try {
     const genres = await getAllGenresFromDb();
-
     res.render("genres", {
       title: "All Genres",
       genres,
@@ -17,43 +18,111 @@ async function getGenres(req, res, next) {
     next(err);
   }
 }
-async function getGenre(req, res, next) {
-  const { genreId } = req.params;
-  try {
-    const genre = await getGenreFromDb(genreId);
 
-    res.render("genre", {
-      title: genre.name,
+/* CREATE */
+export function createGenreGet(req, res) {
+  res.render("genres_new", {
+    title: "Add Genre",
+    errors: [],
+    formData: {},
+  });
+}
+
+export async function createGenrePost(req, res, next) {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.render("genres_new", {
+      title: "Add Genre",
+      errors: errors.array(),
+      formData: req.body,
+    });
+  }
+
+  try {
+    const { name, description } = matchedData(req);
+    await createGenreInDb(name, description);
+
+    res.redirect("/genres");
+  } catch (err) {
+    if (err.status === 409) {
+      return res.render("genres_new", {
+        title: "Add Genre",
+        errors: [{ msg: err.message }],
+        formData: req.body,
+      });
+    }
+    next(err);
+  }
+}
+
+/* UPDATE */
+export async function updateGenreGet(req, res, next) {
+  try {
+    const genre = await getGenreByIdFromDb(req.params.id);
+
+    if (!genre) return next(new Error("Genre not found."));
+
+    res.render("genres_edit", {
+      title: "Edit Genre",
+      errors: [],
+      formData: genre,
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function updateGenrePost(req, res, next) {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.render("genres_edit", {
+      title: "Edit Genre",
+      errors: errors.array(),
+      formData: req.body,
+    });
+  }
+
+  try {
+    const { name, description } = matchedData(req);
+
+    await updateGenreInDb(req.params.id, name, description);
+
+    res.redirect("/genres");
+  } catch (err) {
+    if (err.status === 409) {
+      return res.render("genres_edit", {
+        title: "Edit Genre",
+        errors: [{ msg: err.message }],
+        formData: req.body,
+      });
+    }
+    next(err);
+  }
+}
+
+/* DELETE */
+export async function deleteGenreGet(req, res, next) {
+  try {
+    const genre = await getGenreByIdFromDb(req.params.id);
+
+    if (!genre) return next(new Error("Genre not found."));
+
+    res.render("genres_delete", {
+      title: "Delete Genre",
       genre,
     });
   } catch (err) {
     next(err);
   }
 }
-async function createGenreGet(req, res) {
-  res.render("newGenre");
-}
-async function createGenrePost(req, res, next) {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    const msg = errors.array()[0].msg;
 
-    return res.status(400).render("error", {
-      title: "Validation Error",
-      code: 400,
-      message: msg,
-      details: null,
-    });
-  }
+export async function deleteGenrePost(req, res, next) {
   try {
-    const { name, description } = matchedData(req);
-
-    const genre = await createGenreInDb(name, description);
-    console.log(genre);
-
+    await deleteGenreFromDb(req.params.id);
     res.redirect("/genres");
   } catch (err) {
-    next(err); // goes to your custom error handler
+    next(err);
   }
 }
-export { getGenres, createGenrePost, createGenreGet, getGenre };

@@ -1,6 +1,6 @@
 import { body } from "express-validator";
 
-export const createGenreValidator = [
+export const genreValidator = [
   body("name")
     .trim()
     .notEmpty()

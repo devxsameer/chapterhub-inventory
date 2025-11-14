@@ -1,47 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
   <%- include("partials/head") %>
-  <body>
-    <div
-      class="min-h-screen font-outfit text-neutral-950 bg-neutral-200 flex flex-col"
-    >
-      <%- include("partials/header") %>
+  <body
+    class="h-screen flex flex-col bg-neutral-200 font-outfit overflow-y-auto"
+  >
+    <%- include("partials/header") %>
 
-      <div class="flex grow">
-        <%- include("partials/sidebar") %>
+    <div class="flex pt-12 h-full">
+      <%- include("partials/sidebar") %>
 
-        <div class="grow flex flex-col bg-neutral-50">
-          <main class="grow">
-            <div class="bg-neutral-200 p-4">
-              <h2 class="text-4xl font-semibold mb-2">Genres</h2>
-              <a
-                href="/genres/new"
-                class="text-sm bg-purple-400 px-3 py-1 rounded shadow"
-                >Add a Genre</a
-              >
-            </div>
-            <div class="p-6">
-              <% if (genres.length === 0) { %>
-              <p class="text-neutral-600">No genres found.</p>
-              <% } else { %>
-              <ul class="flex">
-                <% genres.forEach(genre => { %>
-                <li>
+      <div class="ml-64 flex-1">
+        <main class="bg-neutral-50">
+          <div class="bg-neutral-200 p-4 mb-4 sticky top-12">
+            <h2 class="text-4xl font-semibold mb-2">Genres</h2>
+            <a
+              href="/genres/new"
+              class="text-sm bg-purple-500 px-3 py-1 rounded shadow text-white"
+            >
+              Add Genre
+            </a>
+          </div>
+          <div class="p-4">
+            <% if (genres.length === 0) { %>
+            <p class="text-neutral-600">No genres found.</p>
+            <% } else { %>
+            <ul class="space-y-3">
+              <% genres.forEach(genre => { %>
+              <li class="p-4 bg-white rounded-lg shadow flex justify-between">
+                <div>
+                  <h4 class="font-semibold text-lg"><%= genre.name %></h4>
+                  <p class="text-sm text-neutral-600">
+                    <%= genre.description %>
+                  </p>
+                </div>
+
+                <div class="space-x-3">
                   <a
-                    class="p-3 bg-white rounded-lg shadow"
-                    href="/genres/<%= genre.id %>"
+                    href="/genres/<%= genre.id %>/edit"
+                    class="text-blue-600 underline"
+                    >Edit</a
                   >
-                    <%= genre.name %>
-                  </a>
-                </li>
-                <% }) %>
-              </ul>
-              <% } %>
-            </div>
-          </main>
+                  <a
+                    href="/genres/<%= genre.id %>/delete"
+                    class="text-red-600 underline"
+                    >Delete</a
+                  >
+                </div>
+              </li>
+              <% }) %>
+            </ul>
+            <% } %>
+          </div>
+        </main>
 
-          <%- include("partials/footer") %>
-        </div>
+        <%- include("partials/footer") %>
       </div>
     </div>
   </body>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("partials/head") %>
+  <body
+    class="h-screen flex flex-col bg-neutral-200 font-outfit overflow-y-auto"
+  >
+    <%- include("partials/header") %>
+
+    <div class="flex pt-12 h-full">
+      <%- include("partials/sidebar") %>
+
+      <div class="ml-64 flex-1">
+        <main class="h-full grid place-items-center">
+          <div class="max-w-xl mx-auto p-6 bg-neutral-50 rounded-xl shadow-md">
+            <h2 class="text-3xl font-semibold mb-4 text-red-600">
+              Delete Genre
+            </h2>
+
+            <p class="mb-4">
+              Are you sure you want to delete
+              <strong><%= genre.name %></strong>?
+            </p>
+
+            <form action="" method="POST" class="space-x-3">
+              <button class="bg-red-600 px-4 py-2 text-white rounded">
+                Yes, Delete
+              </button>
+
+              <a href="/genres" class="underline">Cancel</a>
+            </form>
+          </div>
+        </main>
+
+        <%- include("partials/footer") %>
+      </div>
+    </div>
+  </body>
+</html>

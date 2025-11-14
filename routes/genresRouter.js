@@ -1,18 +1,32 @@
 import { Router } from "express";
 import {
+  getGenres,
   createGenreGet,
   createGenrePost,
-  getGenres,
-  getGenre
+  updateGenreGet,
+  updateGenrePost,
+  deleteGenrePost,
+  deleteGenreGet,
 } from "../controllers/genresController.js";
-import { createGenreValidator } from "../validators/genresValidators.js";
+import { genreValidator } from "../validators/genresValidators.js";
 
 const genresRouter = Router();
 
 genresRouter.get("/", getGenres);
+
+// CREATE
 genresRouter
   .route("/new")
   .get(createGenreGet)
-  .post(createGenreValidator, createGenrePost);
-genresRouter.get("/:genreId",getGenre)
+  .post(genreValidator, createGenrePost);
+
+// UPDATE
+genresRouter
+  .route("/:id/edit")
+  .get(updateGenreGet)
+  .post(genreValidator, updateGenrePost);
+
+// DELETE
+genresRouter.route("/:id/delete").get(deleteGenreGet).post(deleteGenrePost);
+
 export default genresRouter;
