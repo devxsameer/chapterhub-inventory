@@ -14,6 +14,14 @@
           <div class="max-w-xl mx-auto p-6">
             <h2 class="text-3xl font-semibold mb-4">Edit Genre</h2>
 
+            <% if (errors.length) { %>
+            <ul class="mb-4 text-red-600">
+              <% errors.forEach(err => { %>
+              <li><%= err.msg %></li>
+              <% }) %>
+            </ul>
+            <% } %>
+
             <form action="" method="POST" class="space-y-4">
               <div>
                 <label class="block">Name</label>
@@ -28,8 +36,8 @@
               <div>
                 <label class="block">Description</label>
                 <textarea name="description" class="border p-2 w-full rounded">
-<%= formData.description %></textarea
-                >
+                  <%= formData.description %>
+                </textarea>
               </div>
 
               <button class="bg-purple-500 px-4 py-2 rounded text-white">

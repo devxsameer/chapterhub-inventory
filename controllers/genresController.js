@@ -61,7 +61,13 @@ export async function updateGenreGet(req, res, next) {
   try {
     const genre = await getGenreByIdFromDb(req.params.id);
 
-    if (!genre) return next(new Error("Genre not found."));
+    if (!genre)
+      return res.status(404).render("error", {
+        title: "Genre Not Found",
+        code: 404,
+        message: "Genre not found.",
+        url: req.originalUrl,
+      });
 
     res.render("genres_edit", {
       title: "Edit Genre",
@@ -107,7 +113,13 @@ export async function deleteGenreGet(req, res, next) {
   try {
     const genre = await getGenreByIdFromDb(req.params.id);
 
-    if (!genre) return next(new Error("Genre not found."));
+    if (!genre)
+      return res.status(404).render("error", {
+        title: "Genre Not Found",
+        code: 404,
+        message: "Genre not found.",
+        url: req.originalUrl,
+      });
 
     res.render("genres_delete", {
       title: "Delete Genre",
