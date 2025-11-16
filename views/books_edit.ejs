@@ -63,9 +63,8 @@
                     <option value="">None</option>
 
                     <% genres.forEach((g) => { const isSelected =
-                    String(formData.genre_id) === String(g.id); const
-                    selectedAttr = isSelected ? "selected" : ""; %>
-                    <option value="<%= g.id %>" <%="selectedAttr" %>
+                    String(formData.genre_id) === String(g.id)  %>
+                    <option value="<%= g.id %>" <%= isSelected ? "selected" : "" %>
                       ><%= g.name %>
                     </option>
                     <% }) %>

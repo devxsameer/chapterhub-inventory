@@ -18,6 +18,69 @@
               class="text-sm bg-purple-500 px-3 py-1 rounded shadow text-white"
               >Add Book</a
             >
+            <form
+              method="GET"
+              class="flex flex-col items-start gap-2 mt-6 accent-purple-600"
+            >
+              <input
+                type="hidden"
+                name="search"
+                placeholder="Search title..."
+                value="<%= query.search || '' %>"
+                class="border p-2 rounded bg-white w-64"
+              />
+              <div>
+                <p class="font-semibold text-sm text-neutral-700 mb-2">
+                  Filter by Genre:
+                </p>
+
+                <div class="flex flex-wrap gap-4">
+                  <% genres.forEach(g => { %>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" name="genre" value="<%= g.id %>"
+                    onchange="this.form.submit()" <%= Array.isArray(query.genre)
+                    && query.genre.includes(String(g.id)) ? "checked" : "" %> />
+                    <span class="text-sm text-neutral-800">
+                      <%= g.name %>
+                    </span>
+                  </label>
+                  <% }) %>
+                </div>
+              </div>
+
+              <!-- Sort -->
+              <div>
+                <p class="font-semibold text-sm text-neutral-700 mb-2">
+                  Sort by:
+                </p>
+                <div class="flex flex-wrap gap-4">
+                  <% const options = [ { value: "title_asc", label: "Title A-Z"
+                  }, { value: "title_desc", label: "Title Z-A" }, { value:
+                  "year_desc", label: "Newest" }, { value: "year_asc", label:
+                  "Oldest" }, { value: "price_asc", label: "Price Low → High" },
+                  { value: "price_desc", label: "Price High → Low" }, ];
+                  options.forEach((opt) => { const isSelected = query?.sort ?
+                  String(query.sort) === opt.value : "title_asc" === opt.value
+                  %>
+                  <label
+                    for="<%= opt.value %>"
+                    class="text-sm gap-2 flex items-center"
+                  >
+                    <input type="radio" id="<%= opt.value %>" name="sort" <%=
+                    isSelected ? 'checked' : '' %> value="<%= opt.value %>"
+                    onchange="this.form.submit()" /> <%= opt.label %>
+                  </label>
+                  <% }) %>
+                </div>
+              </div>
+
+              <button
+                class="hidden bg-purple-500 text-white mt-2 px-3 py-1 rounded"
+                aria-hidden="true"
+              >
+                Apply
+              </button>
+            </form>
           </div>
 
           <div class="p-4">

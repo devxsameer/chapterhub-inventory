@@ -26,7 +26,10 @@
             <% } else { %>
             <ul class="space-y-3">
               <% genres.forEach(genre => { %>
-              <li class="p-4 bg-white rounded-lg shadow flex justify-between">
+              <li
+                class="p-4 bg-white rounded-lg shadow flex justify-between hover:bg-neutral-100 cursor-pointer transition"
+                onclick="window.location='/books/?genre=<%= genre.id %>'"
+              >
                 <div>
                   <h4 class="font-semibold text-lg"><%= genre.name %></h4>
                   <p class="text-sm text-neutral-600">
@@ -38,11 +41,13 @@
                   <a
                     href="/genres/<%= genre.id %>/edit"
                     class="text-blue-600 underline"
+                    onclick="event.stopPropagation();"
                     >Edit</a
                   >
                   <a
                     href="/genres/<%= genre.id %>/delete"
                     class="text-red-600 underline"
+                    onclick="event.stopPropagation();"
                     >Delete</a
                   >
                 </div>

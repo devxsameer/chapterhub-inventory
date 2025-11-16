@@ -1,9 +1,9 @@
 import {
-  getAllBooksFromDb,
   getBookByIdFromDb,
   createBookInDb,
   updateBookInDb,
   deleteBookFromDb,
+  getFilteredBooksFromDb,
 } from "../db/queries/books.js";
 
 import { getAllGenresFromDb } from "../db/queries/genres.js"; // to populate dropdown
@@ -11,8 +11,34 @@ import { matchedData, validationResult } from "express-validator";
 
 export async function getBooks(req, res, next) {
   try {
-    const books = await getAllBooksFromDb();
-    res.render("books", { title: "Books", books });
+    let query = req.query;
+
+    // Convert genre to array if single string or nothing
+    let genreFilter = [];
+    if (query.genre) {
+      genreFilter = Array.isArray(query.genre) ? query.genre : [query.genre]; // convert single select to array
+    }
+
+    // CLEAN empty values (no repeated empty keys in URL)
+    const cleanQuery = {};
+    if (query.search) cleanQuery.search = query.search;
+    if (genreFilter.length > 0) cleanQuery.genre = genreFilter;
+    if (query.sort) cleanQuery.sort = query.sort;
+
+    const books = await getFilteredBooksFromDb({
+      search: cleanQuery.search || "",
+      genres: genreFilter,
+      sort: cleanQuery.sort || "",
+    });
+
+    const genres = await getAllGenresFromDb();
+
+    res.render("books", {
+      title: "Books",
+      books,
+      genres,
+      query: cleanQuery,
+    });
   } catch (err) {
     next(err);
   }

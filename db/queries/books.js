@@ -1,13 +1,72 @@
 import pool from "../pool.js";
 
-/* List all books (with genre name) */
-export async function getAllBooksFromDb() {
-  const { rows } = await pool.query(`
+// /* List all books (with genre name) */
+// export async function getAllBooksFromDb() {
+//   const { rows } = await pool.query(`
+//     SELECT b.*, g.name AS genre_name
+//     FROM books b
+//     LEFT JOIN genres g ON b.genre_id = g.id
+//     ORDER BY LOWER(b.title);
+//   `);
+//   return rows;
+// }
+
+export async function getFilteredBooksFromDb({ search, genres, sort }) {
+  let whereClauses = [];
+  let values = [];
+  let orderBy = "ORDER BY LOWER(b.title) ASC";
+
+  // 🔍 Search
+  if (search) {
+    values.push(`%${search}%`);
+    whereClauses.push(`LOWER(b.title) LIKE LOWER($${values.length})`);
+  }
+
+  // 🎭 Genre multi-select
+  if (genres.length > 0) {
+    const placeholders = genres
+      .map((g, index) => "$" + (values.length + index + 1))
+      .join(",");
+
+    values.push(...genres);
+    whereClauses.push(`b.genre_id IN (${placeholders})`);
+  }
+
+  // 🔽 Sorting
+  switch (sort) {
+    case "title_asc":
+      orderBy = "ORDER BY LOWER(b.title) ASC";
+      break;
+    case "title_desc":
+      orderBy = "ORDER BY LOWER(b.title) DESC";
+      break;
+    case "year_asc":
+      orderBy = "ORDER BY b.year ASC NULLS LAST";
+      break;
+    case "year_desc":
+      orderBy = "ORDER BY b.year DESC NULLS LAST";
+      break;
+    case "price_asc":
+      orderBy = "ORDER BY b.price ASC";
+      break;
+    case "price_desc":
+      orderBy = "ORDER BY b.price DESC";
+      break;
+  }
+
+  let sql = `
     SELECT b.*, g.name AS genre_name
     FROM books b
     LEFT JOIN genres g ON b.genre_id = g.id
-    ORDER BY LOWER(b.title);
-  `);
+  `;
+
+  if (whereClauses.length > 0) {
+    sql += " WHERE " + whereClauses.join(" AND ");
+  }
+
+  sql += ` ${orderBy};`;
+
+  const { rows } = await pool.query(sql, values);
   return rows;
 }
 

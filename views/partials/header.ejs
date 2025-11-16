@@ -4,12 +4,25 @@
   <h1 class="text-xl font-bold text-neutral-900">
     <span class="text-purple-700">chapterhub</span>-inventory
   </h1>
-  <form action="/search" method="POST">
-    <input
-      placeholder="Search Books..."
-      type="text"
-      name="searchQuery"
-      class="outline-none border-b-2"
-    />
+  <form method="GET" action="/books">
+    <div class="border-b-2 gap-1 flex items-center">
+      <button class="cursor-pointer rounded">
+        <%- include("icons/searchIcon") %>
+      </button>
+      <input type="text" name="search" placeholder="Search title..." value="<%=
+      locals?.query ? query.search || '': "" %>" class="outline-none" />
+    </div>
+
+    <!-- Preserve genre multi-select -->
+    <% if (locals?.query && query.genre) { const selectedGenres =
+    Array.isArray(query.genre) ? query.genre : [query.genre];
+    selectedGenres.forEach(g => { %>
+    <input type="hidden" name="genre" value="<%= g %>" />
+    <% }) } %>
+
+    <!-- Preserve sorting -->
+    <% if (locals?.query && query.sort) { %>
+    <input type="hidden" name="sort" value="<%= query.sort %>" />
+    <% } %>
   </form>
 </header>
