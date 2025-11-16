@@ -9,16 +9,11 @@
     <div class="flex pt-12 h-full">
       <%- include("partials/sidebar") %>
 
-      <div class="ml-64 flex-1">
+      <div class="xl:ml-64 flex-1">
         <main class="bg-neutral-50">
-          <div class="bg-neutral-200 p-4 mb-4 sticky top-12">
+          <div class="bg-neutral-200 p-4 mb-4 sticky z-30 top-12">
             <h2 class="text-4xl font-semibold mb-2">Genres</h2>
-            <a
-              href="/genres/new"
-              class="text-sm bg-purple-500 px-3 py-1 rounded shadow text-white"
-            >
-              Add Genre
-            </a>
+            <a href="/genres/new" class="btn"> Add Genre </a>
           </div>
           <div class="p-4">
             <% if (genres.length === 0) { %>
@@ -27,26 +22,28 @@
             <ul class="space-y-3">
               <% genres.forEach(genre => { %>
               <li
-                class="p-4 bg-white rounded-lg shadow flex justify-between hover:bg-neutral-100 cursor-pointer transition"
+                class="relative mb-10 cursor-pointer"
                 onclick="window.location='/books/?genre=<%= genre.id %>'"
               >
-                <div>
+                <div
+                  class="z-20 relative w-full p-4 h-full hover:bg-neutral-100 transition bg-white rounded-lg shadow-md"
+                >
                   <h4 class="font-semibold text-lg"><%= genre.name %></h4>
                   <p class="text-sm text-neutral-600">
                     <%= genre.description %>
                   </p>
                 </div>
 
-                <div class="space-x-3">
+                <div class="space-x-3 z-10 absolute right-4 top-full">
                   <a
                     href="/genres/<%= genre.id %>/edit"
-                    class="text-blue-600 underline"
+                    class="btn rounded-t-none"
                     onclick="event.stopPropagation();"
                     >Edit</a
                   >
                   <a
                     href="/genres/<%= genre.id %>/delete"
-                    class="text-red-600 underline"
+                    class="btn rounded-t-none bg-red-700"
                     onclick="event.stopPropagation();"
                     >Delete</a
                   >

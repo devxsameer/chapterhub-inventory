@@ -1,39 +1,33 @@
 <nav
-  class="fixed top-12 left-0 bottom-0 w-64 shrink-0 rounded-tr-xl overflow-hidden bg-center bg-cover bg-no-repeat p-4 bg-[url(/img/sidebar_bg.jpg)]"
+  class="max-xl:hidden fixed top-12 left-0 bottom-0 w-64 shrink-0 rounded-tr-xl overflow-hidden bg-neutral-900 p-4"
 >
-  <!-- Color overlay -->
-  <div class="absolute inset-0 bg-purple-700/70"></div>
-
-  <!-- Actual sidebar content -->
-  <div class="relative z-10">
-    <ul class="flex flex-col gap-2 text-neutral-50">
-      <li>
-        <a
-          href="/"
-          class="flex gap-2 items-center p-2 py-1.5 rounded-lg <%= currentPath === '/' ? 'bg-purple-900' : '' %>"
-        >
-          <%- include("icons/homeIcon") %>
-          <span>Home</span>
-        </a>
-      </li>
-      <li>
-        <a
-          href="/genres"
-          class="flex gap-2 items-center p-2 py-1.5 rounded-lg <%= currentPath.startsWith('/genres') ? 'bg-purple-900' : '' %>"
-        >
-          <%- include("icons/genresIcon") %>
-          <span>Genres</span>
-        </a>
-      </li>
-      <li>
-        <a
-          href="/books"
-          class="flex gap-2 items-center p-2 py-1.5 rounded-lg <%= currentPath.startsWith('/books') ? 'bg-purple-900' : '' %>"
-        >
-          <%- include("icons/booksIcon") %>
-          <span>Books</span>
-        </a>
-      </li>
-    </ul>
-  </div>
+  <ul class="flex flex-col gap-2 text-neutral-50">
+    <li>
+      <a
+        href="/"
+        class="flex gap-2 items-center p-2 py-1.5 shadow rounded-lg <%= currentPath === '/' ? 'bg-teal-900' : '' %>"
+      >
+        <%- include("icons/homeIcon") %>
+        <span>Home</span>
+      </a>
+    </li>
+    <li>
+      <a
+        href="/genres"
+        class="flex gap-2 items-center p-2 py-1.5 shadow rounded-lg <%= currentPath.startsWith('/genres') ? 'bg-teal-900' : '' %>"
+      >
+        <%- include("icons/genresIcon") %>
+        <span>Genres</span>
+      </a>
+    </li>
+    <li>
+      <a
+        href="/books"
+        class="flex gap-2 items-center p-2 py-1.5 shadow rounded-lg <%= currentPath.startsWith('/books') ? 'bg-teal-900' : '' %>"
+      >
+        <%- include("icons/booksIcon") %>
+        <span>Books</span>
+      </a>
+    </li>
+  </ul>
 </nav>

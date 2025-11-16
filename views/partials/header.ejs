@@ -1,12 +1,12 @@
 <header
-  class="fixed px-4 top-0 left-0 right-0 h-12 flex items-center gap-8 justify-between bg-neutral-200"
+  class="fixed px-4 top-0 left-0 right-0 h-12 z-50 flex items-center gap-8 justify-between bg-neutral-200"
 >
   <h1 class="text-xl font-bold text-neutral-900">
-    <span class="text-purple-700">chapterhub</span>-inventory
+    <span class="text-teal-700">chapterhub</span>-inventory
   </h1>
   <form method="GET" action="/books">
-    <div class="border-b-2 gap-1 flex items-center">
-      <button class="cursor-pointer rounded">
+    <div class="border-b-2 gap-1 flex items-center border-teal-700">
+      <button class="cursor-pointer rounded text-teal-700">
         <%- include("icons/searchIcon") %>
       </button>
       <input type="text" name="search" placeholder="Search title..." value="<%=
