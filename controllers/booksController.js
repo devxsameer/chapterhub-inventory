@@ -133,9 +133,12 @@ export async function updateBookPost(req, res, next) {
   try {
     const data = matchedData(req);
 
-    // If a new image is uploaded, replace the image_url
+    // If a new image is uploaded, add image_url
     if (req.file) {
       data.image_url = "/uploads/" + req.file.filename;
+    } else {
+      // Prevent overwriting old image_url with undefined/null
+      delete data.image_url;
     }
 
     await updateBookInDb(req.params.id, data);
@@ -143,6 +146,7 @@ export async function updateBookPost(req, res, next) {
     res.redirect("/books");
   } catch (err) {
     const genres = await getAllGenresFromDb();
+
     if (err.status === 409) {
       return res.render("books_edit", {
         title: "Edit Book",
@@ -151,6 +155,7 @@ export async function updateBookPost(req, res, next) {
         genres,
       });
     }
+
     next(err);
   }
 }

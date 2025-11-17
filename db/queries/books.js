@@ -134,42 +134,31 @@ export async function createBookInDb({
   }
 }
 
-/* Update book */
-export async function updateBookInDb(
-  id,
-  { title, author, description, year, genre_id, image_url, price, quantity }
-) {
-  if (!title || typeof title !== "string") {
+export async function updateBookInDb(id, data) {
+  if (!data.title || typeof data.title !== "string") {
     const err = new Error("Book title is required.");
     err.status = 400;
     throw err;
   }
 
   try {
+    const fields = [];
+    const values = [];
+    let i = 1;
+
+    for (const [key, value] of Object.entries(data)) {
+      fields.push(`${key} = $${i++}`);
+      values.push(typeof value === "string" ? value.trim() : value);
+    }
+
+    values.push(id);
+
     const query = `
       UPDATE books
-      SET title = $1,
-          author = $2,
-          description = $3,
-          year = $4,
-          genre_id = $5,
-          image_url = $6,
-          price = $7,
-          quantity = $8
-      WHERE id = $9
+      SET ${fields.join(", ")}
+      WHERE id = $${i}
       RETURNING *;
     `;
-    const values = [
-      title.trim(),
-      author?.trim() || null,
-      description?.trim() || null,
-      year ? Number(year) : null,
-      genre_id ? Number(genre_id) : null,
-      image_url?.trim() || null,
-      price ? Number(price) : 0.0,
-      quantity ? Number(quantity) : 0,
-      id,
-    ];
 
     const { rows } = await pool.query(query, values);
     return rows[0];
