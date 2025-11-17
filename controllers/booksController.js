@@ -26,7 +26,7 @@ export async function getBooks(req, res, next) {
     if (query.sort) cleanQuery.sort = query.sort;
 
     const books = await getFilteredBooksFromDb({
-      search: cleanQuery.search || "",
+      search: (cleanQuery.search || "").trim(),
       genres: genreFilter,
       sort: cleanQuery.sort || "",
     });
@@ -102,7 +102,14 @@ export async function createBookPost(req, res, next) {
 export async function updateBookGet(req, res, next) {
   try {
     const book = await getBookByIdFromDb(req.params.id);
-    if (!book) return next(new Error("Book not found."));
+    if (!book) {
+      return res.status(404).render("error", {
+        title: "Book Not Found",
+        code: 404,
+        message: "Book not found.",
+        url: req.originalUrl,
+      });
+    }
 
     const genres = await getAllGenresFromDb();
 
@@ -164,7 +171,15 @@ export async function updateBookPost(req, res, next) {
 export async function deleteBookGet(req, res, next) {
   try {
     const book = await getBookByIdFromDb(req.params.id);
-    if (!book) return next(new Error("Book not found."));
+    if (!book) {
+      return res.status(404).render("error", {
+        title: "Book Not Found",
+        code: 404,
+        message: "Book not found.",
+        url: req.originalUrl,
+      });
+    }
+
     res.render("books_delete", { title: "Delete Book", book });
   } catch (err) {
     next(err);

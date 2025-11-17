@@ -1,8 +1,13 @@
 {
   "name": "chapterhub-inventory",
   "version": "1.0.0",
-  "description": "",
+  "author": "Sameer Ali",
+  "description": "ChapterHub Inventory — A full-stack Express + PostgreSQL app for managing books and genres.",
   "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devxsameer/chapterhub-inventory.git"
+  },
   "type": "module",
   "scripts": {
     "start": "node app.js",
@@ -14,7 +19,6 @@
     "css:build": "tailwindcss -i ./public/css/global.css -o ./public/css/output.css --minify"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.22.0+sha512.bf049efe995b28f527fd2b41ae0474ce29186f7edcb3bf545087bd61fbbebb2bf75362d1307fda09c2d288e1e499787ac12d4fcb617a974718a6051f2eee741c",
   "dependencies": {

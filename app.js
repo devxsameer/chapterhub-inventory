@@ -51,7 +51,7 @@ const PORT = process.env.PORT || 6969;
 
 app.listen(PORT, (err) => {
   if (err) {
-    console.log(err);
+    console.error("❌ Server Error:", err);
     return;
   }
   console.log(`✓ Server running on http://localhost:${PORT}`);

@@ -25,14 +25,14 @@ async function createTables() {
 
   await pool.query(`
     CREATE TABLE IF NOT EXISTS genres (
-      id SERIAL PRIMARY KEY,
+      id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
       name VARCHAR(100) NOT NULL UNIQUE,
       description TEXT,
       created_at TIMESTAMPTZ DEFAULT NOW()
     );
 
     CREATE TABLE IF NOT EXISTS books (
-      id SERIAL PRIMARY KEY,
+      id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
       title VARCHAR(255) NOT NULL,
       author VARCHAR(255),
       description TEXT,
@@ -44,6 +44,7 @@ async function createTables() {
       created_at TIMESTAMPTZ DEFAULT NOW(),
       UNIQUE(title, author)
     );
+    CREATE INDEX IF NOT EXISTS idx_books_genre_id ON books(genre_id);
   `);
 
   console.log("   → Tables created ✔");
