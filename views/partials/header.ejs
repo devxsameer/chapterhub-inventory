@@ -1,27 +1,34 @@
 <header
-  class="fixed px-4 top-0 left-0 right-0 h-12 z-50 flex items-center gap-8 justify-between bg-neutral-200"
+  class="fixed px-4 top-0 left-0 right-0 h-12 z-45 flex gap-8 items-center justify-between bg-neutral-200"
 >
-  <h1 class="text-xl font-bold text-neutral-900">
+  <h1
+    class="text-lg md:text-xl font-bold min-w-max text-neutral-900 whitespace-nowrap"
+  >
     <span class="text-teal-700">chapterhub</span>-inventory
   </h1>
-  <form method="GET" action="/books">
-    <div class="border-b-2 gap-1 flex items-center border-teal-700">
-      <button class="cursor-pointer rounded text-teal-700">
+
+  <form method="GET" action="/books" class="flex w-full max-w-56 min-w-0">
+    <div
+      class="flex items-center gap-1 text-sm md:text-base border-b-2 border-teal-700 flex-1 min-w-0"
+    >
+      <button class="cursor-pointer rounded text-teal-700 shrink-0">
         <%- include("icons/searchIcon") %>
       </button>
-      <input type="text" name="search" placeholder="Search title..." value="<%=
-      locals?.query ? query.search || '': "" %>" class="outline-none" />
+
+      <input
+        type="text"
+        name="search"
+        placeholder="Search title..."
+        value="<%= locals?.query ? query.search || '' : '' %>"
+        class="outline-none flex-1 min-w-0"
+      />
     </div>
 
-    <!-- Preserve genre multi-select -->
     <% if (locals?.query && query.genre) { const selectedGenres =
     Array.isArray(query.genre) ? query.genre : [query.genre];
     selectedGenres.forEach(g => { %>
     <input type="hidden" name="genre" value="<%= g %>" />
-    <% }) } %>
-
-    <!-- Preserve sorting -->
-    <% if (locals?.query && query.sort) { %>
+    <% }) } %> <% if (locals?.query && query.sort) { %>
     <input type="hidden" name="sort" value="<%= query.sort %>" />
     <% } %>
   </form>
