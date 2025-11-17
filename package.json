@@ -2,7 +2,7 @@
   "name": "chapterhub-inventory",
   "version": "1.0.0",
   "author": "Sameer Ali",
-  "description": "ChapterHub Inventory — A full-stack Express + PostgreSQL app for managing books and genres.",
+  "description": "A full-stack Express + PostgreSQL inventory app for managing books and genres. Features CRUD operations, image uploads, search, filtering, sorting, and server-rendered views using EJS and Tailwind CSS.",
   "main": "app.js",
   "repository": {
     "type": "git",
