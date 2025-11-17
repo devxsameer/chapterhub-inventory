@@ -11,9 +11,9 @@
 
 @layer components {
   .btn {
-    @apply text-sm bg-teal-700 px-3 py-1 rounded shadow text-white;
+    @apply text-sm bg-teal-700 px-3 py-1 rounded shadow text-white cursor-pointer;
   }
   .btn-lg {
-    @apply text-sm bg-teal-700 px-4 py-2 rounded shadow text-white;
+    @apply text-sm bg-teal-700 px-4 py-2 rounded shadow text-white cursor-pointer;
   }
 }

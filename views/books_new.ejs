@@ -9,7 +9,7 @@
     <div class="flex pt-12 h-full">
       <%- include("partials/sidebar") %>
 
-      <div class="ml-64 flex-1">
+      <div class="xl:ml-64 flex-1">
         <main class="bg-neutral-50">
           <div class="bg-neutral-200 p-4 mb-4 sticky top-12">
             <h2 class="text-3xl font-semibold mb-2">Add Book</h2>
@@ -96,35 +96,32 @@
                     class="border p-2 w-full rounded"
                   />
                 </div>
+              </div>
+              <div>
+                <label class="block">Book Cover</label>
 
+                <!-- Preview Box -->
                 <div>
-                  <label class="block mb-1">Book Cover</label>
-
-                  <!-- Preview Box -->
-                  <div class="mb-3">
-                    <img
-                      id="imagePreview"
-                      src="<%= formData.image_url || '' %>"
-                      class="<%= formData.image_url ? 'block' : 'hidden' %> w-40 rounded shadow"
-                    />
-                  </div>
-
-                  <!-- File Input -->
-                  <input
-                    type="file"
-                    name="image"
-                    id="imageInput"
-                    accept="image/*"
-                    class="border p-2 w-full rounded bg-white"
+                  <img
+                    id="imagePreview"
+                    src="<%= formData?.image_url || '' %>"
+                    class="<%= formData?.image_url ? 'block' : 'hidden' %> w-40 mb-2 rounded shadow"
                   />
                 </div>
+
+                <!-- File Input -->
+                <input
+                  type="file"
+                  name="image"
+                  id="imageInput"
+                  accept="image/*"
+                  class="border p-2 w-full rounded bg-white"
+                />
               </div>
 
               <div>
-                <button class="bg-purple-500 px-4 py-2 text-white rounded">
-                  Create Book
-                </button>
-                <a href="/books" class="ml-4 underline">Cancel</a>
+                <button class="btn-lg">Create Book</button>
+                <a href="/books" class="ml-4 underline text-sm">Cancel</a>
               </div>
             </form>
           </div>
