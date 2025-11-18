@@ -12,9 +12,43 @@ Built as part of **The Odin Project**, but structured like a production-grade MV
 
 ---
 
+## 🔖 Tech Stack & Tools
+
+![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/Express.js-000000?logo=express&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
+![Neon](https://img.shields.io/badge/NeonDB-00E599?logo=postgresql&logoColor=white)
+![EJS](https://img.shields.io/badge/EJS-8BC34A?logo=ejs&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?logo=tailwind-css&logoColor=white)
+![Multer](https://img.shields.io/badge/Multer-FFCA28?logo=node.js&logoColor=black)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+![The Odin Project](https://img.shields.io/badge/The%20Odin%20Project-000000?logo=the-odin-project&logoColor=white)
+
+---
+
 ## 📸 Screenshots
 
-> _Add images (homepage, books list, add/edit screens, etc.)_
+### Home Page
+
+![home](./public/img/sc_first.png)
+
+### Books Page
+
+![home](./public/img/sc_second.png)
+
+### Edit Book Page
+
+![home](./public/img/sc_third.png)
+
+### Delete Genre Page
+
+![home](./public/img/sc_fourth.png)
+
+### Error Page
+
+![home](./public/img/sc_fifth.png)
+
+> Go to Live demo Section to see more pages - Error 500 Page, Edit Genre Page , Delete Book Page
 
 ---
 
@@ -128,10 +162,6 @@ chapterhub-inventory/
 ├─ views/
 │
 └─ public/
-    ├─ uploads/
-    └─ css/
-        ├─ global.css
-        └─ output.css
 
 ```
 
@@ -177,7 +207,7 @@ CREATE INDEX idx_books_genre_id ON books(genre_id);
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/chapterhub-inventory.git
+git clone https://github.com/devxsameer/chapterhub-inventory.git
 cd chapterhub-inventory
 ```
 
