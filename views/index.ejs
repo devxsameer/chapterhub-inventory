@@ -19,7 +19,7 @@
                 <span class="text-teal-700 text-5xl">ChapterHub</span>
                 Inventory
               </h1>
-              <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+              <p class="text-md md:text-lg text-gray-600 max-w-2xl mx-auto">
                 A simple, elegant inventory system for bookstores. Manage
                 genres, track books, and keep your library organized.
               </p>
@@ -38,25 +38,55 @@
             <!-- Genres Card -->
             <a
               href="/genres"
-              class="block p-8 bg-white rounded-2xl shadow hover:shadow-lg transition border border-gray-200"
+              class="block relative p-8 overflow-hidden rounded-2xl shadow hover:shadow-lg group transition border border-neutral-900"
             >
-              <h2 class="text-2xl font-bold mb-3">📂 Manage Genres</h2>
-              <p class="text-gray-600">
-                Create, edit, and organize book genres. Helps keep your
-                bookstore structured.
-              </p>
+              <!-- Background Image -->
+              <div
+                class="absolute inset-0 bg-[url('/img/hero_second.jpg')] bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+              ></div>
+
+              <!-- Gradient Overlay -->
+              <div
+                class="absolute z-20 inset-0 bg-linear-to-r from-teal-700/80 to-teal-700/5"
+              ></div>
+
+              <!-- Content -->
+              <div class="relative z-30">
+                <h2 class="text-2xl font-bold text-white mb-3">
+                  📂 Manage Genres
+                </h2>
+                <p class="text-neutral-300">
+                  Create, edit, and organize book genres. Helps keep your
+                  bookstore structured.
+                </p>
+              </div>
             </a>
 
             <!-- Books Card -->
             <a
               href="/books"
-              class="block p-8 bg-white rounded-2xl shadow hover:shadow-lg transition border border-gray-200"
+              class="block relative p-8 overflow-hidden rounded-2xl group shadow hover:shadow-lg transition border border-neutral-900"
             >
-              <h2 class="text-2xl font-bold mb-3">📘 Manage Books</h2>
-              <p class="text-gray-600">
-                Add new books, update quantities, assign genres, and track your
-                inventory effortlessly.
-              </p>
+              <!-- Background Image -->
+              <div
+                class="absolute inset-0 bg-[url('/img/hero_first.jpg')] bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+              ></div>
+
+              <!-- Gradient Overlay -->
+              <div
+                class="absolute z-20 inset-0 bg-linear-to-r from-teal-700/70 to-teal-700/5"
+              ></div>
+
+              <!-- Content -->
+              <div class="relative z-30">
+                <h2 class="text-2xl font-bold text-white mb-3">
+                  📘 Manage Books
+                </h2>
+                <p class="text-neutral-300">
+                  Add new books, update quantities, assign genres, and track
+                  your inventory effortlessly.
+                </p>
+              </div>
             </a>
           </section>
         </div>

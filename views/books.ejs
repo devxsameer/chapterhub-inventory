@@ -9,8 +9,8 @@
     <div class="flex pt-12 h-full">
       <%- include("partials/sidebar") %>
 
-      <div class="xl:ml-64 flex-1">
-        <main class="bg-neutral-50">
+      <div class="xl:ml-64 flex-1 flex flex-col">
+        <main class="bg-neutral-50 grow">
           <div class="bg-neutral-200 p-4 z-30 sticky top-12">
             <h2 class="text-4xl font-semibold mb-2">Books</h2>
             <a href="/books/new" class="btn">Add Book</a>
@@ -107,6 +107,23 @@
                     <p class="mt-2 text-sm text-neutral-700">
                       <%= book.description %>
                     </p>
+                    <div
+                      class="flex gap-2 border-t-2 border-neutral-300 mt-1 pt-1"
+                    >
+                      <p class="text-sm text-neutral-600 flex flex-col grow">
+                        Price:
+                        <span class="text-base font-semibold text-neutral-950"
+                          >$<%= book.price %></span
+                        >
+                      </p>
+                      <p class="text-sm text-neutral-600 flex flex-col grow">
+                        Quantity:
+                        <span class="text-base font-semibold text-neutral-950"
+                          ><%= book.quantity %></span
+                        >
+                      </p>
+                    </div>
+
                     <% } %>
                   </div>
                 </div>
